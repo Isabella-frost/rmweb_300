@@ -95,6 +95,7 @@
                                                 visible="{= !!${view>MaktxLong} }" />
                                                 
                                                 <List
+                                                    showNoData="false"
                                                     items="{
                                                         path: 'view>CatalogAttributeSet/results',
                                                         filters: [{ path: 'AttrType', operator: 'EQ', value1: 'MDM' }]
@@ -110,11 +111,11 @@
 
                                                 <!-- List for document links (AttrType = DOC, Datasource = URL_DEEP) -->
                                                 <List
+                                                    showNoData="false"
                                                     items="{
                                                         path: 'view>CatalogAttributeSet/results',
                                                         filters: [
-                                                            { path: 'AttrType', operator: 'EQ', value1: 'DOC' },
-                                                            { path: 'Datasource', operator: 'EQ', value1: 'URL_DEEP' }
+                                                            { path: 'AttrType', operator: 'EQ', value1: 'DOC' }
                                                         ]
                                                     }"
                                                     visible="{= !!${view>CatalogAttributeSet/results} }">
@@ -126,12 +127,30 @@
                                                     </CustomListItem>
                                                 </List>
 
-                                            <Image
-                                                src="{
-                                                    path: 'view>PictureUrl',
-                                                    formatter: '.formatter.pictureUrl'
-                                                }"
-                                                width="100px"/>
+                                                <List
+                                                    showNoData="false"
+                                                    items="{
+                                                        path: 'view>CatalogAttributeSet/results',
+                                                        filters: [
+                                                            { path: 'AttrType', operator: 'EQ', value1: 'PIC' }
+                                                        ]
+                                                    }"
+                                                    visible="{= !!${view>CatalogAttributeSet/results} }">
+                                                    <CustomListItem>
+                                                        <HBox>
+                                                            <Text text="Billeder: " class="sapUiTinyMarginEnd"/>
+                                                             <Image
+                                                                src="{
+                                                                    path: 'view>Url',
+                                                                    formatter: '.formatter.pictureUrl'
+                                                                }"
+                                                                width="60px" height="60px"
+                                                                class="sapUiSmallMarginEnd"
+                                                                visible="{= !${/sap/ui/Device/system/phone} }"/>
+                                                        </HBox>
+                                                    </CustomListItem>
+                                                </List>
+
                                         </VBox>
                                     </content>
                                 </Panel>
@@ -140,8 +159,17 @@
                         </VBox>
                     </Page>
 
-                <Page id="detailPage" title="{i18n>cart}"
-                    layoutData="{layout:SplitterLayoutData, resizable: true, size: '40%'}">
+        <Page
+            id="detailPage"
+            title="{i18n>cart}"
+            layoutData="{layout:SplitterLayoutData, resizable: true, size: '40%'}">
+
+            <!-- 👇 This puts the button next to the title -->
+            <headerContent>
+                <Button id="VaresogViewButtonOrder"
+                        text="{i18n>order}"
+                        press=".onOrder"/>
+            </headerContent>
                     
                     <List id="basketList" items="{view>/shoppingcart}"> 
                         <CustomListItem id="VaresogViewCustomListFav">
@@ -162,10 +190,6 @@
                         </CustomListItem>
                     </List>
 
-                    <Toolbar id="VaresogViewButtonOrderToolbar">
-                        <ToolbarSpacer id="VaresogViewToolbarSpacerButton"/>
-                        <Button id="VaresogViewButtonOrder" text="{i18n>order}" press=".onOrder"/>
-                    </Toolbar>
                 </Page>
                 </layout:contentAreas>
             </layout:Splitter>

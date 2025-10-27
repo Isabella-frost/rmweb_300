@@ -124,6 +124,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
             checkFav();
 
             this._fetchUserData();
+            this._fetchFavoriteLists();
         },
 
 

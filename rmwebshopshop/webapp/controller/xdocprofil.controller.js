@@ -75,12 +75,21 @@ function (BaseController, MessageToast, JSONModel, MessageBox, Filter, FilterOpe
             });
         },
         
-        _fetchFavoriteLists: function() {
+        _fetchFavoriteLists: function () {
             var oODataModel = this.getOwnerComponent().getModel(); 
             var oWebshopModel = this.getView().getModel("webshop");
-            const sUserNo       = this._getCurrentUserNo();
-            
+            const sUserNo = this._getCurrentUserNo();
+
+            // Define the "Alle varer" default list
+            const oAllItemsList = {
+                UserNo: sUserNo || "",
+                FavoriteList: "Alle varer",
+                GuidMat: "0"
+            };
+
             if (!oODataModel) {
+                // If no OData model, just show "Alle varer"
+                oWebshopModel.setProperty("/lists", [oAllItemsList]);
                 return;
             }
 
@@ -90,20 +99,21 @@ function (BaseController, MessageToast, JSONModel, MessageBox, Filter, FilterOpe
 
             oODataModel.read("/FavoriteSet", {
                 filters: aFilters,
-                urlParameters: { 
-                    "$format": "json"
-                },
-                success: function(oData) {
-                    if (oData.results) {
-                        oWebshopModel.setProperty("/lists", oData.results);
-                    } else {
-                        MessageToast.show("No favorite lists found.");
-                        oWebshopModel.setProperty("/lists", []);
-                    }
-                },
-                error: function(oError) {
-                    MessageToast.show("Failed to load favorite lists.");
-                    console.error("OData Read FavoriteSet failed:", oError);
+                urlParameters: { "$format": "json" },
+                success: function (oData) {
+                    let aFavoriteLists = oData.results || [];
+
+                    // ✅ Always insert "Alle varer" first
+                    aFavoriteLists.unshift(oAllItemsList);
+
+                    oWebshopModel.setProperty("/lists", aFavoriteLists);
+
+                    console.log("Favorite lists loaded:", aFavoriteLists);
+                }.bind(this),
+                error: function (oError) {
+                    MessageToast.show("Kunne ikke hente favoritlister. Viser kun 'Alle varer'.");
+                    oWebshopModel.setProperty("/lists", [oAllItemsList]);
+                    console.error("FavoriteSet read error:", oError);
                 }
             });
         },
@@ -160,15 +170,19 @@ function (BaseController, MessageToast, JSONModel, MessageBox, Filter, FilterOpe
          * Handler for 'Gem' button (for FavoriteList).
          * Updates FavoriteList.
          */
-        onUpdateFavoriteList: function() {
+        onUpdateFavoriteList: function () {
             var oViewModel = this.getView().getModel("view");
             var sFavoriteList = oViewModel.getProperty("/UserInfo/favorite");
-            
-            // The property to update is FavoriteList
+
+            // 💡 If "Alle varer" is selected, treat it as "no specific favorite list"
+            if (sFavoriteList === "Alle varer" || !sFavoriteList) {
+                sFavoriteList = ""; // or null, depending on your backend expectations
+            }
+
             var oUpdates = {
                 "FavoriteList": sFavoriteList
             };
-            
+
             this._updateUser(oUpdates, "Favoritliste");
         },
 
