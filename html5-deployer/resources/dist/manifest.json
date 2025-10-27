@@ -1,0 +1,268 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "rm.webshop.shop",
+    "type": "application",
+    "i18n": {
+      "bundleUrl": "i18n/i18n.properties",
+      "supportedLocales": [
+        ""
+      ]
+    },
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.19.1",
+      "toolsId": "bf064ae6-0add-412c-8d6a-92052b70ec55"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZWEBSHOP_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.30",
+      "libs": {
+        "sap.m": {},
+        "sap.f": {},
+        "sap.uxap": {},
+        "sap.ui.layout": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "rm.webshop.shop.i18n.i18n",
+          "supportedLocales": [
+            ""
+          ]
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "rm.webshop.shop.view",
+        "async": true,
+        "viewPath": "rm.webshop.shop.view"
+      },
+      "routes": [
+        {
+          "name": "Routemain",
+          "pattern": ":?query:",
+          "target": [
+            "Targetmain"
+          ]
+        },
+        {
+          "pattern": "vaelgklinik",
+          "name": "Routevaelgklinik",
+          "target": [
+            "Targetvaelgklinik"
+          ]
+        },
+        {
+          "name": "Routevaresog",
+          "pattern": "varesog",
+          "target": [
+            "Targetvaresog"
+          ]
+        },
+        {
+          "name": "Routebestilling",
+          "pattern": "bestilling",
+          "target": [
+            "Targetbestilling"
+          ]
+        },
+        {
+          "name": "Routeprofil",
+          "pattern": "profil",
+          "target": [
+            "Targetprofil"
+          ]
+        },
+        {
+          "name": "Routesupport",
+          "pattern": "support",
+          "target": [
+            "Targetsupport"
+          ]
+        },
+        {
+          "name": "Routeinfo",
+          "pattern": "info",
+          "target": [
+            "Targetinfo"
+          ]
+        },
+        {
+          "name": "Routexdocvaresog",
+          "pattern": "xdocvaresog",
+          "target": [
+            "Targetxdocvaresog"
+          ]
+        },
+        {
+          "name": "Routexdocbestilling",
+          "pattern": "xdocbestilling",
+          "target": [
+            "Targetxdocbestilling"
+          ]
+        },
+        {
+          "name": "Routexdocprofil",
+          "pattern": "xdocprofil",
+          "target": [
+            "Targetxdocprofil"
+          ]
+        },
+        {
+          "name": "Routexdocsupport",
+          "pattern": "xdocsupport",
+          "target": [
+            "Targetxdocsupport"
+          ]
+        }
+      ],
+      "targets": {
+        "Targetmain": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "main",
+          "viewName": "main"
+        },
+        "Targetvaresog": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "varesog",
+          "viewName": "varesog"
+        },
+        "Targetbestilling": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "bestilling",
+          "viewName": "bestilling"
+        },
+        "Targetprofil": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "profil",
+          "viewName": "profil"
+        },
+        "Targetsupport": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "support",
+          "viewName": "support"
+        },
+        "Targetinfo": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "info",
+          "viewName": "info"
+        },
+        "Targetxdocvaresog": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "xdocvaresog",
+          "viewName": "xdocvaresog"
+        },
+        "Targetxdocbestilling": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "xdocbestilling",
+          "viewName": "xdocbestilling"
+        },
+        "Targetxdocprofil": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "xdocprofil",
+          "viewName": "xdocprofil"
+        },
+        "Targetxdocsupport": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "xdocsupport",
+          "viewName": "xdocsupport"
+        },
+        "Targetvaelgklinik": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "vaelgklinik",
+          "viewName": "vaelgklinik"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "rm.webshop.shop.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

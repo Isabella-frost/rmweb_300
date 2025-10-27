@@ -1,0 +1,43 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    
+    <Dialog
+        id="favoriteListDialogRemove" 
+        title="{i18n>removeFromFavoriteListTitle}"
+        resizable="false"
+        draggable="true"
+        contentWidth="25rem"
+        afterClose=".onCloseRemoveFromListDialog">
+        
+        <content>
+            <VBox class="sapUiSmallMargin">
+                
+                <VBox id="listSelectContainerRemove">
+                    <Label text="{i18n>selectListToRemoveFrom}" class="sapUiSmallMarginBottom" />
+                    <Select
+                        id="favoriteListDialogSelectRemove"
+                        width="100%"
+                        items="{webshop>/removableLists}"> 
+                        <core:Item key="{webshop>FavoriteList}" text="{webshop>FavoriteList}" />
+                    </Select>
+                </VBox>
+
+                <VBox id="newListInputContainerRemove" visible="false">
+                </VBox>
+                
+            </VBox>
+        </content>
+        
+        <buttons>
+            <Button
+                id="saveListButtonRemove"
+                text="{i18n>removeListConfirm}"
+                type="Reject" 
+                press=".onConfirmRemoveFavorite" /> 
+            <Button
+                text="{i18n>cancel}"
+                press=".onCloseRemoveFromListDialog" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,84 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout">
+    <Dialog
+        id="orderConfirmationDialog"
+        title="Bekræft bestilling">
+        <content>
+            <VBox class="sapUiContentPadding">
+                <Text
+                    id="orderConfirmationText"
+                    class="sapUiSmallMarginBottom" />
+
+                <Title
+                    level="H3"
+                    text="Vælg leveringsadresse"
+                    class="sapUiSmallMarginTop" />
+                
+                <RadioButtonGroup 
+                    columns="2" 
+                    selectedIndex="{orderDialog>/selectedAddressOption}" 
+                    select="onAddressOptionSelect">
+                    <buttons>
+                        <RadioButton id="radioExisting" text="Registreret adresse" />
+                        <RadioButton id="radioNew" text="Alternativ adresse" />
+                    </buttons>
+                </RadioButtonGroup>
+
+                <Title
+                    level="H3"
+                    text="Din registrerede adresse"
+                    class="sapUiSmallMarginTop" 
+                    visible="{= ${orderDialog>/selectedAddressOption} === 0}"/>
+                
+                <Text
+                    id="orderAddressText"
+                    visible="{= ${orderDialog>/selectedAddressOption} === 0}"
+                    text="{orderDialog>/registeredAddress/streetName} {orderDialog>/registeredAddress/streetNr}, {orderDialog>/registeredAddress/postalCode} {orderDialog>/registeredAddress/city}" />
+
+                <Title
+                    level="H3"
+                    text="Alternativ leveringsadresse"
+                    class="sapUiSmallMarginTop" 
+                    visible="{= ${orderDialog>/selectedAddressOption} === 1}"/>
+                    
+                <f:SimpleForm
+                    id="alternativeAddressForm"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    visible="{= ${orderDialog>/selectedAddressOption} === 1}">
+                    <f:content>
+                        <Label text="Vejnavn" />
+                        <Input id="alternativeStreetInput" value="{orderDialog>/alternativeAddress/streetName}" />
+                        <Label text="Husnummer" />
+                        <Input id="alternativeStreetNrInput" value="{orderDialog>/alternativeAddress/streetNr}" />
+                        <Label text="Postnummer" />
+                        <Input id="alternativePostalCodeInput" value="{orderDialog>/alternativeAddress/postalCode}" />
+                        <Label text="By" />
+                        <Input id="alternativeCityInput" value="{orderDialog>/alternativeAddress/city}" />
+                    </f:content>
+                </f:SimpleForm>
+
+                <Title
+                    level="H3"
+                    text="Kontaktinformation"
+                    class="sapUiSmallMarginTop" />
+
+                <Label text="Email:" />
+                <Input id="emailInput" value="{orderDialog>/contactInfo/email}"/>
+                <Label text="Telefonnummer:" class="sapUiSmallMarginTop" />
+                <HBox>
+                <Input value="+45" width="4em" editable="false" textAlign="Center" class="sapUiTinyMarginEnd" 
+                                        id="phonePrefixProfil"/>
+                <Input id="phoneInput" value="{orderDialog>/contactInfo/phone}" width="21em"/>
+                </HBox>
+            </VBox>
+        </content>
+        <buttons>
+            <Button text="Bestil" press="onConfirmOrder" type="Emphasized" />
+            <Button text="Annuller" press="onCancelOrder" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

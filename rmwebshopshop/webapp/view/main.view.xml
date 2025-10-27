@@ -1,0 +1,27 @@
+<mvc:View controllerName="rm.webshop.shop.controller.main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="idPage" title="{i18n>title}">
+            <content>
+            <IconTabBar id="idtablogin">
+                <items>
+                    <IconTabFilter text="{i18n>loginmitid}" id="idMitID">
+                        <content>
+                            <!-- Your content for 'Log på med MitID' goes here -->
+                        </content>
+                    </IconTabFilter>
+                    <IconTabFilter text="{i18n>loginbruger}" id="idSAPlogin">
+                        <content>
+                            <Label text="Log på" id="idloginHeader" />
+                            <Input placeholder="CPR" id="iduserIdInput" />
+                            <Input placeholder="CVR" id="idpasswordInput" />
+                            <Button text="Log på som patient" id="idloginButton" press="onPressLogin" />
+                            <Button text="Log på som læge" id="idloginDoc" press="onPressDoc" />
+                            <Button text="{i18n>forgotpw}" id="idforgotPassword" />
+                        </content>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

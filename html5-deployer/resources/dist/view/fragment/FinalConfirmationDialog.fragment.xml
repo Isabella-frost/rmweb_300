@@ -1,0 +1,22 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog
+        id="finalConfirmationDialog"
+        title="Bekræft bestilling">
+        <content>
+            <VBox class="sapUiContentPadding">
+                <Text id="finalConfirmationText" class="sapUiSmallMarginBottom" />
+                <Title level="H3" text="Leveringsadresse" />
+                <Text id="finalAddressText" class="sapUiSmallMarginBottom" />
+                <Title level="H3" text="Kontaktinformation" class="sapUiSmallMarginTop" />
+                <Text id="finalEmailText" />
+                <Text id="finalPhoneText" />
+            </VBox>
+        </content>
+        <buttons>
+            <Button text="Bestil" press="onFinalOrder" type="Emphasized" />
+            <Button text="Annuller" press="onFinalCancel" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

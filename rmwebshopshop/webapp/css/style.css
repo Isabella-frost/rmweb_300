@@ -1,0 +1,33 @@
+/* Enter your custom styles here */
+.customPanelHeader {
+  min-height: 80px; /* Set your desired minimum height here */
+  padding: 10px; /* Add some padding for breathing room */
+}
+
+.customHBox {
+  height: 100%;
+}
+
+/* Left column: keep the same width for EVERY row */
+.fixedImageCol {
+  width: 90px;          /* visual column width */
+  min-width: 90px;      /* never shrink smaller than this */
+  flex: 0 0 90px;       /* do not grow or shrink; reserve exactly 90px */
+  text-align: center;
+}
+
+/* Middle column: take the remaining space */
+.middleCol {
+  flex: 1 1 auto;       /* grow and shrink within the free space */
+}
+
+/* Right column: fixed width so buttons/quantities align too */
+.fixedRightCol {
+  min-width: 120px;
+  flex: 0 0 120px;      /* fixed column on the right */
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+  align-items: flex-end; /* right-align contents */
+  display: flex;         /* ensure align-items works */
+  flex-direction: column;
+}

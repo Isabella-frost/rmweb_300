@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog
+        id="orderSentDialog"
+        title="Bestilling afsendt">
+        <content>
+            <VBox class="sapUiContentPadding">
+                <Text id="orderSentText" class="sapUiSmallMarginBottom" />
+            </VBox>
+        </content>
+        <buttons>
+            <Button text="OK" press="onOrderSentConfirm" type="Emphasized" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,1 @@
+{"version":3,"file":"Formatter.js","names":["sap","ui","define","pictureUrl","sUrl","sLogo","require","toUrl","trim"],"sources":["Formatter-dbg.js"],"mappings":"AAAAA,IAAIC,GAAGC,OAAO,GAAI,WACd,aACA,MAAO,CAMHC,WAAY,SAAUC,GAClB,IAAIC,EAAQL,IAAIC,GAAGK,QAAQC,MAAM,mBAAqB,sBAGtD,IAAKH,GAAQA,EAAKI,SAAW,GAAI,CAE7B,OAAOH,CACX,CACA,OAAOD,CACX,EAER","ignoreList":[]}

@@ -1,0 +1,2 @@
+sap.ui.define([],function(){"use strict";return{pictureUrl:function(r){var e=sap.ui.require.toUrl("rm/webshop/shop")+"/img/billedevej.jpg";if(!r||r.trim()===""){return e}return r}}});
+//# sourceMappingURL=Formatter.js.map

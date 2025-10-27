@@ -1,0 +1,49 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    
+    <Dialog
+        id="favoriteListDialog"
+        title="{i18n>addToFavoriteListTitle}"
+        resizable="false"
+        draggable="true"
+        contentWidth="25rem"
+        afterClose=".onCloseFavoriteListDialog">
+        
+        <content>
+            <VBox class="sapUiSmallMargin">
+                
+                <VBox id="listSelectContainer">
+                    <Label text="{i18n>selectExistingList}" class="sapUiSmallMarginBottom" />
+                    <Select
+                        id="favoriteListDialogSelect"
+                        width="100%"
+                        items="{webshop>/lists}">
+                        <core:Item key="{webshop>FavoriteList}" text="{webshop>FavoriteList}" />
+                    </Select>
+                    <Link text="{i18n>createNewListLink}" class="sapUiTinyMarginTop" press=".onCreateNewList" />
+                </VBox>
+
+                <VBox id="newListInputContainer" visible="false">
+                    <Label text="{i18n>newListNameLabel}" class="sapUiSmallMarginBottom" />
+                    <Input
+                        id="newListNameInput"
+                        placeholder="{i18n>newListNamePlaceholder}"
+                        value="{webshop>/newListName}" />
+                </VBox>
+                
+            </VBox>
+        </content>
+        
+        <buttons>
+            <Button
+                id="saveListButton"
+                text="{i18n>selectListSave}"
+                type="Accept"
+                press=".onSaveFavoriteList" />
+            <Button
+                text="{i18n>cancel}"
+                press=".onCloseFavoriteListDialog" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

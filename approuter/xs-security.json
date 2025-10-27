@@ -1,0 +1,11 @@
+{
+    "xsappname": "rmwebshopshop-xsuaa",
+    "tenant-mode": "dedicated",
+    "oauth2-configuration": {
+        "redirect-uris": [
+            "https://rmwebshopshop-approuter-happy-marmot-ot.cfapps.eu10-004.hana.ondemand.com/login/callback",
+            "https://rmwebshopshop-approuter-happy-marmot-ot.cfapps.eu10-004.hana.ondemand.com/**",
+            "http://localhost:5001"
+        ]
+    }
+}

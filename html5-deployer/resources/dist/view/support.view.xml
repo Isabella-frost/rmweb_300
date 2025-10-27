@@ -1,0 +1,80 @@
+<mvc:View controllerName="rm.webshop.shop.controller.support"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:u="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+
+
+    <u:ObjectPageHeaderContent id="BestillingViewObjHeader">
+        <u:content>
+
+            <Image id="BestillingViewImageLogo"
+                src="{
+                    path: 'view>/rmLogo'
+                }"
+                width="18%" height="10%"/>
+            
+            <Image id="BestillingViewImageToAddSpace"
+                src="{
+                    path: 'view>/123'
+                }"
+                width="40%" height="5%"/>
+            
+            <layout:VerticalLayout id="ProfilViewUserInfoHeader">
+                <Text text="Navn: {view>/UserInfo/navn}" class="smallText" id="doctor"/>
+                <Text text="Adresse: {view>/UserInfo/adresse}, {view>/UserInfo/zip} {view>/UserInfo/by}" class="smallText" id="ydernr"/>
+                <Text text="Telefon: {view>/UserInfo/tlfnr}" class="smallText" id="cvrnr"/>
+                <Text text="Bruger nr: {view>/UserInfo/brugernr}" class="smallText" id="bruger"/>
+                <Text text="Afdeling: {view>/UserInfo/afdeling}" class="smallText" id="afd"/>
+            </layout:VerticalLayout>
+            <Button text="Log af" press="onBack"></Button>
+        </u:content>
+    </u:ObjectPageHeaderContent>
+
+    <Page id="Supportpage">
+        <content>
+            <IconTabBar id="idTopLevelTab" select=".handleIconTabBarSelect">
+                <items>
+                    <IconTabFilter text="Varesøgning" id="HeadSoegning" key="HeadSoegning"/>
+                    <IconTabFilter text="Bestillingsoversigt" id="HeadOversigt" key="HeadOversigt"/>
+                    <IconTabFilter text="Profil" id="HeadProfil" key="HeadProfil"/>
+                    <IconTabFilter text="Hjælp" id="HeadSupport" key="HeadSupport"/>
+                </items>
+            </IconTabBar>
+
+            <VBox id="helpContent" visible="{= ${view>/selectedTabKey} === 'HeadSupport'}">
+                
+                <Panel id="contactPanel" headerText="Kontakt os" expandable="true" expanded="true" class="sapUiSmallMargin" width="90%">
+                    <content>
+                        <VBox>
+                            <Text text="Har du brug for hjælp, er du velkommen til at kontakte os. " class="sapUiTinyMarginEnd" />
+                            <Text text="Mail: rm@webshop.dk." class="sapUiTinyMarginEnd" />
+                            <Text text="Telefon: +45 12 34 56 78." class="sapUiTinyMarginEnd" />
+                        </VBox>
+                        <Text text="Vores åbningstider er mandag til fredag fra 09:00 til 17:00." />
+                    </content>
+                </Panel>
+
+
+                <Panel id="faqPanel" headerText="Vejledninger" expandable="true" expanded="true" class="sapUiSmallMargin" width="90%">
+                        <Text text="Vejledning til at lave en bestilling:" class="sapUiTinyMarginBottom"  />
+                        <VBox>
+                            <Text text="1. Gå til 'Varesøgning' fanen." />
+                            <Text text="2. Søg efter produkter og tilføj dem til din kurv." />
+                            <Text text="3. Tryk på 'Bestil'." />
+                            <Text text="4. Vælg og bekræft dine leverings- og kontaktoplysninger." />
+                            <Text text=" " />
+                        </VBox>
+  
+                        <Text text="Vejledning til at opdatere din profil:" class="sapUiTinyMarginBottom" design="Bold" />
+                        <VBox>
+                            <Text text="1. Gå til 'Profil' fanen." />
+                            <Text text="2. Klik på 'Rediger' knappen." />
+                            <Text text="3. Foretag dine ændringer og klik på 'Gem'." />
+                        </VBox>
+                </Panel>
+            </VBox>
+            </content>
+    </Page>
+</mvc:View>

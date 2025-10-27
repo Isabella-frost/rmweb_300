@@ -1,0 +1,18 @@
+{
+  "welcomeFile": "rmwebshopshop/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/user-api(.*)",
+      "target": "$1",
+      "service": "sap-approuter-userapi"
+    },
+    {
+      "source": "^/sap/(.*)$",
+      "target": "/sap/$1",
+      "destination": "dws9116",
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
+    }
+  ]
+}

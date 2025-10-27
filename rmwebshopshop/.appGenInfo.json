@@ -1,0 +1,24 @@
+{
+  "generationParameters": {
+    "generationDate": "Mon Oct 13 2025 12:59:49 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "http://dwsifl:8010/sap/opu/odata/sap/ZWEBSHOP_SRV",
+    "appName": "shop",
+    "appTitle": "RM Webshop",
+    "appDescription": "RM Webshop",
+    "appNamespace": "rm.webshop",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.30",
+    "enableCodeAssist": false,
+    "enableEslint": false,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.19.1",
+    "template": "Basic V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}
