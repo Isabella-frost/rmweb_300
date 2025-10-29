@@ -80,16 +80,23 @@ function (BaseController, MessageToast, JSONModel, MessageBox, Filter, FilterOpe
                             // Collect all tracking links
                                 if (oItem.TrackTraceSet && oItem.TrackTraceSet.results && oItem.TrackTraceSet.results.length > 0) {
                                     oItem.TrackTraces = oItem.TrackTraceSet.results.map(function(tt) {
+                                        // Format OrderQuantity: always replace '.' with ','
+                                        let sFormattedQty = "";
+                                        if (tt.OrderQuantity !== undefined && tt.OrderQuantity !== null && tt.OrderQuantity !== "") {
+                                            sFormattedQty = tt.OrderQuantity.toString().replace(".", ",");
+                                        }
+
                                         return {
                                             UrlTrackTrace: tt.UrlTrackTrace,
                                             TtStatusText: tt.TtStatusText || "",
-                                            OrderQuantity: tt.OrderQuantity || "",
+                                            OrderQuantity: sFormattedQty,
                                             CreateDateEdit: tt.CreateDateEdit || ""
                                         };
                                     });
                                 } else {
                                     oItem.TrackTraces = [];
                                 }
+
                             // Clean up
                             delete oItem.TrackTraceSet;
                             return oItem;
