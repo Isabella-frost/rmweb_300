@@ -120,7 +120,7 @@ function (BaseController, MessageToast, JSONModel, MessageBox, Filter, FilterOpe
                     console.log("OrderHeaderSet (with TrackTraceSet) loaded:", aOrders.length, "orders");
                 },
                 error: function (oError) {
-                    sap.m.MessageBox.error("Failed to load order history data (with TrackTrace).");
+                    sap.m.MessageBox.error("Fejl ved load af bestillingshistorik. Genindlæs siden.");
                     console.error("OrderHeaderSet read error:", oError);
                 }
             });
