@@ -18,7 +18,12 @@
                     <Select
                         id="favoriteListDialogSelect"
                         width="100%"
-                        items="{webshop>/lists}">
+                        items="{
+                            path: 'webshop>/lists',
+                            filters: [
+                                { path: 'FavoriteList', operator: 'NE', value1: 'Alle varer' }
+                            ]
+                        }">
                         <core:Item key="{webshop>FavoriteList}" text="{webshop>FavoriteList}" />
                     </Select>
                     <Link text="{i18n>createNewListLink}" class="sapUiTinyMarginTop" press=".onCreateNewList" />

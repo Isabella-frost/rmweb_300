@@ -72,7 +72,8 @@
                         <List id="catalogList" 
                             items="{path: 'view>/catalog'}"
                             mode="SingleSelectMaster"
-                            itemPress=".onCatalogItemPress"> 
+                            itemPress=".onCatalogItemPress"
+                            growing="true"> 
 
                             <CustomListItem>
                                 <Panel expandable="true" expanded="false" expand=".onExpandMaterial">

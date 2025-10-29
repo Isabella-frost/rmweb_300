@@ -769,7 +769,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                     return; 
                 }
                 
-                var sFinalPhoneNumber = "+45 " + sCleanPhone;
+                var sFinalPhoneNumber = sCleanPhone;
                 oDialogData.contactInfo.phone = sFinalPhoneNumber;
             } else {
                 // If the input is empty, ensure the model property is cleared

@@ -453,7 +453,7 @@ onOrder: function () {
             }
             
             // If validation passes
-            var sFinalPhoneNumber = "+45 " + sCleanPhone;
+            var sFinalPhoneNumber = sCleanPhone;
             oDialogData.contactInfo.phone = sFinalPhoneNumber;
             // -------------------------------------------------------------
 
