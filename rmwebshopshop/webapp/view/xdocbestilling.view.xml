@@ -105,7 +105,9 @@
                                                                         <VBox items="{ordersModel>TrackTraces}">
                                         <HBox class="sapUiSmallMarginBegin sapUiTinyMarginTop" alignItems="Center">
                                         <items>
+                                                <HBox width="190px">
                                                 <Text text=" • {ordersModel>CreateDateEdit} {ordersModel>TtStatusText} {ordersModel>OrderQuantity} {ordersModel>OrderUnit}" />
+                                                </HBox>
                                                 <Text text=" | " class="sapUiTinyMarginBeginEnd" />
                                                 <Link text="Track &amp; Trace"
                                                     href="{ordersModel>UrlTrackTrace}"
