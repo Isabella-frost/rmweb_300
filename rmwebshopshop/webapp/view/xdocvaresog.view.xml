@@ -45,18 +45,17 @@
                 <layout:contentAreas>
                 <Page id="masterPage" title="{i18n>products}" class="myMasterPage"
                     layoutData="{layout:SplitterLayoutData, resizable: true, size: '60%'}">
-                    <VBox id="VaresogViewSplitterVbox" height="60%">
 
-                        <HBox width="60%" alignItems="Center" class="sapUiTinyMarginBottom">
+                    <headerContent>
                         <SearchField
                             id="searchField"
                             placeholder="{i18n>searchPlaceholder}"
-                            width="26em"
-                            liveChange=".onSearchMaterials"/>
-
-                        <Select
+                            liveChange=".onSearchMaterials"
+                            width="18em"/>
+                            
+                            <Select
                                     id="favoriteListSelect"
-                                    width="14em"
+                                    width="11em"
                                     forceSelection="false"
                                     selectedKey="{view>/selectedList}"
                                     change="onFilterMaterialsByList"
@@ -65,8 +64,10 @@
                                     <core:Item
                                         key="{webshop>FavoriteList}"
                                         text="{webshop>FavoriteList}" />
-                                </Select>
-                        </HBox>
+                            </Select>
+                    </headerContent>
+
+                    <VBox id="VaresogViewSplitterVbox" height="60%">
 
                         <List id="catalogList" 
                             items="{path: 'view>/catalog'}"

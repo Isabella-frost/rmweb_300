@@ -46,11 +46,15 @@
                 <layout:contentAreas>
                 <Page id="masterPage" title="{i18n>products}" class="myMasterPage"
                     layoutData="{layout:SplitterLayoutData, resizable: true, size: '60%'}">
+
+                                <headerContent>
+                                    <SearchField
+                                        id="searchField"
+                                        placeholder="{i18n>searchPlaceholder}"
+                                        liveChange=".onSearchMaterials"/>
+                                </headerContent>
+                                
                     <VBox id="VaresogViewSplitterVbox">
-                        <SearchField
-                            id="searchField"
-                            placeholder="{i18n>searchPlaceholder}"
-                            liveChange=".onSearchMaterials"/>
 
                         <List id="catalogList" items="{
                                 path: 'view>/catalog'
