@@ -22,12 +22,21 @@
             
             <layout:VerticalLayout id="ProfilViewUserInfoHeader">
                 <Text text="Navn: {view>/UserInfo/navn}" class="smallText" id="doctor"/>
-                <Text text="Adresse: {view>/UserInfo/adresse}, {view>/UserInfo/zip} {view>/UserInfo/by}" class="smallText" id="ydernr"/>
+                <Text text="Adresse: {view>/UserInfo/street}, {view>/UserInfo/zip} {view>/UserInfo/city}" class="smallText" id="ydernr"/>
                 <Text text="Telefon: {view>/UserInfo/tlfnr}" class="smallText" id="cvrnr"/>
                 <Text text="Bruger nr: {view>/UserInfo/brugernr}" class="smallText" id="bruger"/>
                 <Text text="Afdeling: {view>/UserInfo/afdeling}" class="smallText" id="afd"/>
             </layout:VerticalLayout>
-            <Button text="Log af" press="onBack"></Button>
+            <layout:VerticalLayout id="hi">
+             <Button text="Log af" press=".onBack"></Button>
+
+                <Button
+                    icon="sap-icon://cart"
+                    press=".onOpenBasket"
+                    tooltip="Vis kurv">
+                </Button>
+            
+            </layout:VerticalLayout>
         </u:content>
     </u:ObjectPageHeaderContent>
 
@@ -35,7 +44,7 @@
         <content>
             <IconTabBar id="idTopLevelTab" select=".handleIconTabBarSelect">
                 <items>
-                    <IconTabFilter text="Varesøgning" id="ProfilHeadSoegning" key="HeadSoegning" />
+                    <IconTabFilter text="Varesøgning/Varekurv" id="ProfilHeadSoegning" key="HeadSoegning" />
                     <IconTabFilter text="Bestillingsoversigt" id="ProfilHeadOversigt" key="HeadOversigt" />
                     <IconTabFilter text="Profil" id="ProfilHeadProfil" key="HeadProfil" />
                     <IconTabFilter text="Hjælp" id="HeadSupport" key="HeadSupport"/>

@@ -27,7 +27,18 @@
                 <Text text="Bruger nr: {view>/UserInfo/brugernr}" class="smallText" id="bruger"/>
                 <Text text="Afdeling: {view>/UserInfo/afdeling}" class="smallText" id="afd"/>
             </layout:VerticalLayout>
-            <Button text="Log af" press="onBack"></Button>
+            
+            <layout:VerticalLayout id="hi">
+             <Button text="Log af" press=".onBack"></Button>
+
+                <Button
+                    icon="sap-icon://cart"
+                    press=".onOpenBasket"
+                    tooltip="Vis kurv">
+                </Button>
+            
+            </layout:VerticalLayout>
+            
         </u:content>
     </u:ObjectPageHeaderContent>
 
@@ -35,7 +46,7 @@
             <content>
             <IconTabBar id="idTopLevelTab" select=".handleIconTabBarSelect">
                 <items>
-                    <IconTabFilter text="Varesøgning" id="HeadSoegning" key="HeadSoegning"/>
+                    <IconTabFilter text="Varesøgning/Varekurv" id="HeadSoegning" key="HeadSoegning"/>
                     <IconTabFilter text="Bestillingsoversigt" id="HeadOversigt" key="HeadOversigt"/>
                     <IconTabFilter text="Profil" id="HeadProfil" key="HeadProfil"/>
                     <IconTabFilter text="Hjælp" id="HeadSupport" key="HeadSupport"/>

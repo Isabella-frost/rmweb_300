@@ -91,7 +91,7 @@ function (BaseController, MessageToast, JSONModel, MessageBox, Filter, FilterOpe
                                 } else {
                                     oItem.TrackTraces = [];
                                 }
-                                
+
                             // Clean up
                             delete oItem.TrackTraceSet;
                             return oItem;
@@ -395,6 +395,11 @@ function (BaseController, MessageToast, JSONModel, MessageBox, Filter, FilterOpe
         onBack() {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("Routemain");
+        },
+
+        onOpenBasket: function () {
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("Routevaresog");
         }
     });
 });

@@ -233,6 +233,11 @@ function (BaseController, MessageToast, JSONModel, MessageBox, Filter, FilterOpe
                 onBack: function () {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("Routemain");
+        },
+
+        onOpenBasket: function () {
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("Routexdocvaresog");
         }
     });
 });
