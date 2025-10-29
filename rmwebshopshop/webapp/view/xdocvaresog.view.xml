@@ -203,12 +203,13 @@
                                     <Text id="VaresogViewItemNumbersFav" text="{view>Levmat} ({view>Matnr})"/>
                                 </VBox>
                                 <VBox id="VaresogViewVboxMaterialsQuant">
-                                    <HBox id="VaresogViewHBoxQuantities" justifyContent="SpaceAround">
+                                    <Text id="VaresogViewUnit" text="{view>OrderUnitEdit}"/> 
+                                    <HBox id="VaresogViewHBoxQuantities" class="myHBoxSpacing">
                                         <Button id="VaresogViewButtonDecrQuant" text="{i18n>decreaseQuantity}" press=".onDecreaseQuantity"/>
                                         <Text id="VaresogViewQuantityText" text="{view>OrderQuantity}"/>
                                         <Button id="VaresogViewButtonIncrQuant" text="{i18n>increaseQuantity}" press=".onAddToCart"/>
+                                        <Button id="VaresogViewButtonRemoveFromCart" icon="sap-icon://delete" press=".onRemoveFromCart"/>
                                     </HBox>
-                                    <Button id="VaresogViewButtonRemoveFromCart" text="{i18n>removeFromCart}" press=".onRemoveFromCart"/>
                                 </VBox>
                             </HBox>
                         </CustomListItem>

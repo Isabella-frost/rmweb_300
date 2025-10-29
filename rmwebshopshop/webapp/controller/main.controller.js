@@ -2,53 +2,72 @@ sap.ui.define([
     "./BaseController",
     "sap/m/MessageToast",
     "sap/m/MessageBox",
-    "sap/ui/model/json/JSONModel"
-], (BaseController, MessageToast, MessageBox, JSONModel) => {
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], (BaseController, MessageToast, MessageBox, JSONModel, Filter, FilterOperator) => {
     "use strict";
 
     return BaseController.extend("rm.webshop.shop.controller.main", {
+
         onInit() {},
-        
+
+        _parseODataError(oError) {
+            let sErrorMessage = "Der opstod en fejl. Prøv igen.";
+
+            try {
+                if (oError && oError.responseText) {
+                    const oErrorObj = JSON.parse(oError.responseText);
+
+                    // Standard SAP OData error structure
+                    if (oErrorObj.error?.message?.value) {
+                        sErrorMessage = oErrorObj.error.message.value;
+                    }
+                    // Sometimes found in innererror.errordetails
+                    else if (
+                        oErrorObj.error?.innererror?.errordetails?.length > 0
+                    ) {
+                        sErrorMessage =
+                            oErrorObj.error.innererror.errordetails[0].message ||
+                            sErrorMessage;
+                    }
+                } else if (oError && oError.message) {
+                    sErrorMessage = oError.message;
+                }
+            } catch (e) {
+                console.error("Fejl ved parsing af OData fejl:", e);
+            }
+
+            return sErrorMessage;
+        },
+
         /**
          * Helper function: SHA512 hashing with key
          */
         async _hashCprWithKey(sCpr) {
-            // 1. Define Key and Data
-            // Use the key exactly as specified in the prompt (no trailing dot)
-            const sKeyString = "TESTks75ka;.kiaqq-po/gf&.hsqTEST"; 
+            const sKeyString = "TESTks75ka;.kiaqq-po/gf&.hsqTEST";
             const encoder = new TextEncoder();
-            
-            // The data to be signed is just the CPR value.
-            // The key is handled separately by the HMAC algorithm.
-            const dataToHash = encoder.encode(sCpr); 
+            const dataToHash = encoder.encode(sCpr);
             const keyBytes = encoder.encode(sKeyString);
 
-            // 2. Import the Key for HMAC
             const cryptoKey = await crypto.subtle.importKey(
-                "raw",                             // Format of the key data
-                keyBytes,                          // The key as an ArrayBuffer/Uint8Array
-                { name: "HMAC", hash: "SHA-512" }, // Algorithm details
-                false,                             // Not extractable
-                ["sign"]                           // Usage: signing (hashing)
+                "raw",
+                keyBytes,
+                { name: "HMAC", hash: "SHA-512" },
+                false,
+                ["sign"]
             );
 
-            // 3. Compute HMAC-SHA512
-            const hashBuffer = await crypto.subtle.sign(
-                "HMAC",
-                cryptoKey,
-                dataToHash
-            );
-
-            // 4. Convert ArrayBuffer to uppercase hex string
+            const hashBuffer = await crypto.subtle.sign("HMAC", cryptoKey, dataToHash);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("").toUpperCase();
-
-            return hashHex;
+            return hashArray.map(b => b.toString(16).padStart(2, "0")).join("").toUpperCase();
         },
 
+        /**
+         * 👤 Login method for patients (CPR)
+         */
         async onPressLogin() {
             const sCpr = this.byId("iduserIdInput").getValue().trim();
-
             if (!sCpr) {
                 MessageToast.show("Indtast venligst et CPR-nummer.");
                 return;
@@ -65,26 +84,20 @@ sap.ui.define([
 
             const oODataModel = this.getOwnerComponent().getModel();
             const that = this;
-
-            // Build filter for OData
-            const aFilters = [
-                new sap.ui.model.Filter("CprHash", sap.ui.model.FilterOperator.EQ, sCprHash)
-            ];
+            const aFilters = [new Filter("CprHash", FilterOperator.EQ, sCprHash)];
 
             oODataModel.read("/UserSet", {
                 filters: aFilters,
-               success(oData) {
+                success(oData) {
                     const aResults = oData.results;
                     if (aResults.length === 0) {
                         MessageToast.show("Ingen brugere fundet for dette CPR-nummer.");
                         return;
                     }
 
-                    // Create model for login users (even if only one)
                     const oUsersModel = new JSONModel({ users: aResults });
                     that.getOwnerComponent().setModel(oUsersModel, "loginUsers");
 
-                    // Create a login context model for patient
                     const oLoginContext = new JSONModel({ role: "patient" });
                     that.getOwnerComponent().setModel(oLoginContext, "loginContext");
 
@@ -92,34 +105,38 @@ sap.ui.define([
 
                     if (aResults.length === 1) {
                         const oSelected = aResults[0];
-
                         const oGlobalModel = that.getOwnerComponent().getModel("globalUser");
+
                         if (oGlobalModel) {
                             oGlobalModel.setProperty("/UserNo", oSelected.UserNo);
                             oGlobalModel.setProperty("/User", oSelected);
                             try {
-                                window.localStorage.setItem("rm.webshop.globalUser", JSON.stringify(oGlobalModel.getData()));
+                                window.localStorage.setItem(
+                                    "rm.webshop.globalUser",
+                                    JSON.stringify(oGlobalModel.getData())
+                                );
                             } catch (e) {}
                         }
 
-                        // Navigate directly to Routevaresog (patient start)
                         oRouter.navTo("Routevaresog");
-                        return;
+                    } else {
+                        oRouter.navTo("Routevaelgklinik");
                     }
-
-                    // Otherwise, go to selection view
-                    oRouter.navTo("Routevaelgklinik");
                 },
 
                 error(oError) {
                     console.error("OData read error:", oError);
-                    MessageBox.error("Kunne ikke hente brugerdata. Prøv igen.");
+                    const sErrorMessage = that._parseODataError(oError);
+                    MessageBox.error(sErrorMessage);
                 }
             });
         },
 
+        /**
+         * 👨‍⚕️ Login method for doctors (CVR)
+         */
         onPressDoc() {
-            const sCvr = this.byId("idpasswordInput").getValue().trim(); // CVR input
+            const sCvr = this.byId("idpasswordInput").getValue().trim();
             if (!sCvr) {
                 MessageToast.show("Indtast venligst et CVR-nummer.");
                 return;
@@ -127,10 +144,7 @@ sap.ui.define([
 
             const oODataModel = this.getOwnerComponent().getModel();
             const that = this;
-
-            const aFilters = [
-                new sap.ui.model.Filter("Cvr", sap.ui.model.FilterOperator.EQ, sCvr)
-            ];
+            const aFilters = [new Filter("Cvr", FilterOperator.EQ, sCvr)];
 
             oODataModel.read("/UserSet", {
                 filters: aFilters,
@@ -149,31 +163,31 @@ sap.ui.define([
 
                     const oRouter = sap.ui.core.UIComponent.getRouterFor(that);
 
-                    // ✅ If only ONE user, skip the selection view
                     if (aResults.length === 1) {
                         const oSelected = aResults[0];
-
-                        // Set to globalUser model
                         const oGlobalModel = that.getOwnerComponent().getModel("globalUser");
+
                         if (oGlobalModel) {
                             oGlobalModel.setProperty("/UserNo", oSelected.UserNo);
                             oGlobalModel.setProperty("/User", oSelected);
                             try {
-                                window.localStorage.setItem("rm.webshop.globalUser", JSON.stringify(oGlobalModel.getData()));
+                                window.localStorage.setItem(
+                                    "rm.webshop.globalUser",
+                                    JSON.stringify(oGlobalModel.getData())
+                                );
                             } catch (e) {}
                         }
 
-                        // Navigate directly to Routeinfo (doctor view)
                         oRouter.navTo("Routeinfo");
-                        return;
+                    } else {
+                        oRouter.navTo("Routevaelgklinik");
                     }
-
-                    // Otherwise, go to selection view
-                    oRouter.navTo("Routevaelgklinik");
                 },
+
                 error(oError) {
                     console.error("OData read error:", oError);
-                    MessageBox.error("Kunne ikke hente brugerdata. Prøv igen.");
+                    const sErrorMessage = that._parseODataError(oError);
+                    MessageBox.error(sErrorMessage);
                 }
             });
         }

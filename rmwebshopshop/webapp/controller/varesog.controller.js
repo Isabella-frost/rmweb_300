@@ -83,7 +83,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                     console.log("BasketSet loaded:", oData.results);
                 },
                 error: function (oError) {
-                    sap.m.MessageBox.error("Failed to load shopping cart data.");
+                    sap.m.MessageBox.error("Fejl ved load af varekurvdata. Prøv venligst igen.");
                     console.error("BasketSet read error", oError);
                 }
             });
@@ -121,7 +121,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                 }.bind(this), // .bind(this) to maintain controller context
                 error: function (oError) {
                     sap.ui.core.BusyIndicator.hide();
-                    sap.m.MessageBox.error("Failed to load catalog data.");
+                    sap.m.MessageBox.error("Fejl ved load af katalogdata. Prøv igen.");
                     console.error("CatalogSet read error", oError);
                 }.bind(this) // Use .bind(this)
             });
@@ -341,7 +341,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                     MessageToast.show(oMaterialData.Maktx + " fjernet fra kurv");
                 }.bind(this),
                 error: function (oError) {
-                    MessageBox.error("Failed to remove material from cart. Please try again.");
+                    MessageBox.error("Fejl ved fjernelse af materiale fra kurv. Prøv venligst igen.");
                     console.error("BasketSet create error:", oError);
                 }
             });

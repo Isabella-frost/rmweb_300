@@ -93,10 +93,10 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                     oWebshopModel.setProperty("/lists", aFavoriteLists);
                 }.bind(this),
                 error: function(oError) {
-                    MessageToast.show("Failed to load favorite lists. Showing default list.");
+                    MessageToast.show("Fejl i load af favoritliste.");
                     // If OData call fails, at least show the hardcoded list
                     oWebshopModel.setProperty("/lists", [oAllItemsList]);
-                console.error("OData Read FavoriteSet failed:", oError);
+                console.error("OData læs favoritliste fejl:", oError);
                 }
             });
         },
@@ -227,8 +227,8 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                     
                 }.bind(this),
                 error: function (oError) {
-                    MessageBox.error(this.getResourceBundle().getText("favoriteAddError", [sFavoriteListName]));
-                    console.error("FavoriteSet Create failed:", oError);
+                    MessageBox.error(this.getResourceBundle().getText("Fejl ved tilføjelse af favoritliste", [sFavoriteListName]));
+                    console.error("Oprettelse af favoritliste er fejlet:", oError);
                 }.bind(this)
             });
         },
@@ -328,7 +328,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                 }.bind(this),
                 error: function (oError) {
                     sap.m.MessageBox.error(this.getResourceBundle().getText("Varen blev ikke fjernet fra favoritlisten. Prøv igen."));
-                    console.error("FavoriteSet Delete failed:", oError);
+                    console.error("FavoriteSet Delete er fejlet:", oError);
                 }.bind(this)
             });
         },
@@ -356,7 +356,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                     console.log("BasketSet loaded:", oData.results);
                 },
                 error: function (oError) {
-                    sap.m.MessageBox.error("Failed to load shopping cart data.");
+                    sap.m.MessageBox.error("Fejl ved load af varekurv data. Genindlæs siden.");
                     console.error("BasketSet read error", oError);
                 }
             });
@@ -419,7 +419,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                 }.bind(this), // Use .bind(this) to maintain controller context
                 error: function (oError) {
                     sap.ui.core.BusyIndicator.hide();
-                    sap.m.MessageBox.error("Failed to load catalog data for list: " + (sFavoriteList || "Alle varer"));
+                    sap.m.MessageBox.error("Fejl ved load af katalogdata: " + (sFavoriteList || "Alle varer"));
                     console.error("CatalogSet read error", oError);
                 }.bind(this) // Use .bind(this) to maintain controller context
             });
@@ -646,7 +646,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                     MessageToast.show(oMaterialData.Maktx + " fjernet fra kurv");
                 }.bind(this),
                 error: function (oError) {
-                    MessageBox.error("Failed to remove material from cart. Please try again.");
+                    MessageBox.error("Fejl ved fjernelse af vare fra kurv. Prøv venligst igen.");
                     console.error("BasketSet create error:", oError);
                 }
             });
