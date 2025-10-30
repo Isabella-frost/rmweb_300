@@ -1,7 +1,7 @@
 {
   "_version": "1.60.0",
   "sap.app": {
-    "id": "rm.webshop.shop",
+    "id": "rm.webshop.test",
     "type": "application",
     "i18n": {
       "bundleUrl": "i18n/i18n.properties",
@@ -68,7 +68,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "rm.webshop.shop.i18n.i18n",
+          "bundleName": "rm.webshop.test.i18n.i18n",
           "supportedLocales": [
             ""
           ]
@@ -95,9 +95,9 @@
         "transition": "slide",
         "type": "View",
         "viewType": "XML",
-        "path": "rm.webshop.shop.view",
+        "path": "rm.webshop.test.view",
         "async": true,
-        "viewPath": "rm.webshop.shop.view"
+        "viewPath": "rm.webshop.test.view"
       },
       "routes": [
         {
@@ -259,7 +259,7 @@
       }
     },
     "rootView": {
-      "viewName": "rm.webshop.shop.view.App",
+      "viewName": "rm.webshop.test.view.App",
       "type": "XML",
       "id": "App",
       "async": true

@@ -1,2 +1,2 @@
-sap.ui.define(["rm/webshop/shop/controller/main.controller"],function(n){"use strict";QUnit.module("main Controller");QUnit.test("I should test the main controller",function(o){var t=new n;t.onInit();o.ok(t)})});
+sap.ui.define(["rm/webshop/test/controller/main.controller"],function(t){"use strict";QUnit.module("main Controller");QUnit.test("I should test the main controller",function(n){var o=new t;o.onInit();n.ok(o)})});
 //# sourceMappingURL=main.controller.js.map

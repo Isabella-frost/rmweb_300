@@ -1,2 +1,2 @@
-sap.ui.define(["sap/ui/test/Opa5","./arrangements/Startup","./NavigationJourney"],function(e,a){"use strict";e.extendConfig({arrangements:new a,viewNamespace:"rm.webshop.shop.view.",autoWait:true})});
+sap.ui.define(["sap/ui/test/Opa5","./arrangements/Startup","./NavigationJourney"],function(e,t){"use strict";e.extendConfig({arrangements:new t,viewNamespace:"rm.webshop.test.view.",autoWait:true})});
 //# sourceMappingURL=AllJourneys.js.map

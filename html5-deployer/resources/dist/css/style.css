@@ -31,3 +31,8 @@
   display: flex;         /* ensure align-items works */
   flex-direction: column;
 }
+
+.myHBoxSpacing {
+    gap: 1rem;           /* even spacing between all children */
+    align-items: center;  /* vertically center buttons & text */
+}

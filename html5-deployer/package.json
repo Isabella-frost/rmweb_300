@@ -1,5 +1,5 @@
 {
-    "name": "rmwebshopshop-html5-deployer",
+    "name": "rmwebshoptest-html5-deployer",
     "dependencies": {
         "@sap/html5-app-deployer": "6.2.0"
     },

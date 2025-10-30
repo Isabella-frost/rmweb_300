@@ -1,5 +1,5 @@
 {
-  "welcomeFile": "rmwebshopshop/index.html",
+  "welcomeFile": "rmwebshoptest/index.html",
   "authenticationMethod": "route",
   "routes": [
     {
@@ -10,7 +10,7 @@
     {
       "source": "^/sap/(.*)$",
       "target": "/sap/$1",
-      "destination": "dws9116",
+      "destination": "dws9116300",
       "authenticationType": "xsuaa",
       "csrfProtection": false
     }

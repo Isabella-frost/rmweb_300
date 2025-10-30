@@ -11,7 +11,7 @@ sap.ui.define([
 function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter, FilterOperator, Formatter) {
     "use strict";
 
-    return BaseController.extend("rm.webshop.shop.controller.varesog", {
+    return BaseController.extend("rm.webshop.test.controller.varesog", {
 
         // all dialog properties
         _oOrderDialog: null,
@@ -20,7 +20,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
         formatter: Formatter,
 
         onInit: function () {
-            var sLogo = sap.ui.require.toUrl("rm/webshop/shop") + "/img/Logo.jpg";
+            var sLogo = sap.ui.require.toUrl("rm/webshop/test") + "/img/Logo.jpg";
             // Setup the main view model
             var oViewModel = new JSONModel({
                 rmLogo: sLogo,
@@ -83,7 +83,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                     console.log("BasketSet loaded:", oData.results);
                 },
                 error: function (oError) {
-                    sap.m.MessageBox.error("Failed to load shopping cart data.");
+                    sap.m.MessageBox.error("Fejl ved load af varekurvdata. Prøv venligst igen.");
                     console.error("BasketSet read error", oError);
                 }
             });
@@ -121,7 +121,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                 }.bind(this), // .bind(this) to maintain controller context
                 error: function (oError) {
                     sap.ui.core.BusyIndicator.hide();
-                    sap.m.MessageBox.error("Failed to load catalog data.");
+                    sap.m.MessageBox.error("Fejl ved load af katalogdata. Prøv igen.");
                     console.error("CatalogSet read error", oError);
                 }.bind(this) // Use .bind(this)
             });
@@ -341,7 +341,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
                     MessageToast.show(oMaterialData.Maktx + " fjernet fra kurv");
                 }.bind(this),
                 error: function (oError) {
-                    MessageBox.error("Failed to remove material from cart. Please try again.");
+                    MessageBox.error("Fejl ved fjernelse af materiale fra kurv. Prøv venligst igen.");
                     console.error("BasketSet create error:", oError);
                 }
             });
@@ -364,7 +364,7 @@ onOrder: function () {
             if (!this._oOrderDialog) {
                 Fragment.load({
                     id: this.getView().getId(),
-                    name: "rm.webshop.shop.view.fragment.OrderDialog", 
+                    name: "rm.webshop.test.view.fragment.OrderDialog", 
                     controller: this
                 }).then(function(oDialog) {
                     this._oOrderDialog = oDialog;
@@ -453,7 +453,7 @@ onOrder: function () {
             }
             
             // If validation passes
-            var sFinalPhoneNumber = "+45 " + sCleanPhone;
+            var sFinalPhoneNumber = sCleanPhone;
             oDialogData.contactInfo.phone = sFinalPhoneNumber;
             // -------------------------------------------------------------
 
@@ -474,7 +474,7 @@ onOrder: function () {
             if (!this._oFinalConfirmationDialog) {
                 Fragment.load({
                     id: this.getView().getId(),
-                    name: "rm.webshop.shop.view.fragment.FinalConfirmationDialog", 
+                    name: "rm.webshop.test.view.fragment.FinalConfirmationDialog", 
                     controller: this
                 }).then(function(oDialog) {
                     this._oFinalConfirmationDialog = oDialog;
@@ -513,7 +513,7 @@ onOrder: function () {
             if (!this._oOrderSentDialog) {
                 Fragment.load({
                     id: this.getView().getId(),
-                    name: "rm.webshop.shop.view.fragment.OrderSentDialog", 
+                    name: "rm.webshop.test.view.fragment.OrderSentDialog", 
                     controller: this
                 }).then(function(oDialog) {
                     this._oOrderSentDialog = oDialog;

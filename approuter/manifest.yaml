@@ -1,6 +1,6 @@
 ---
 applications:
-- name: rmwebshopshop-approuter
+- name: rmwebshoptest-approuter
   buildpacks:
   - https://github.com/cloudfoundry/nodejs-buildpack
   memory: 1GB
@@ -8,7 +8,7 @@ applications:
   random-route: true
   path:
   services:
-  - rmwebshopshop-xsuaa
-  - rmwebshopshop-destination
-  - rmwebshopshop-html5-runtime
-  - rmwebshopshop-connectivity
+  - rmwebshoptest-xsuaa
+  - rmwebshoptest-destination
+  - rmwebshoptest-html5-runtime
+  - rmwebshoptest-connectivity

@@ -1,6 +1,6 @@
 ---
 applications:
-- name: rmwebshopshop-html5-deployer
+- name: rmwebshoptest-html5-deployer
   buildpacks:
   - https://github.com/cloudfoundry/nodejs-buildpack
   memory: 256MB
@@ -8,4 +8,4 @@ applications:
   random-route: true
   path:
   services:
-  - rmwebshopshop-html5-host
+  - rmwebshoptest-html5-host
