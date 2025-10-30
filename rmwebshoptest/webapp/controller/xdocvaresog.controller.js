@@ -669,7 +669,7 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
             if (!this._oOrderDialog) {
                 Fragment.load({
                     id: this.getView().getId(),
-                    name: "rm.webshop.test.view.fragment.OrderDialog", 
+                    name: "rm.webshop.test.view.fragment.XdocOrderDialog", 
                     controller: this
                 }).then(function(oDialog) {
                     this._oOrderDialog = oDialog;
@@ -750,6 +750,18 @@ function (BaseController, MessageToast, JSONModel, Fragment, MessageBox, Filter,
             if (!sEmail) {
                 MessageBox.error("Udfyld venligst email-adressen for kontaktinformation.");
                 return;
+            }
+
+             // --- Mail Validation ---
+            var oMailInput = this.byId("emailInput");
+            var sRawMail = oMailInput.getValue().trim() || "";
+
+            // ✅ Only validate if mail is filled
+            if (sRawMail.length > 0) {
+                if (!sRawMail.includes("@") || !sRawMail.includes(".")) {
+                    MessageBox.error("Indtast venligst en gyldig e-mailadresse.");
+                    return;
+                }
             }
             
             // Store the cleaned email back into the model data (optional, but good practice)

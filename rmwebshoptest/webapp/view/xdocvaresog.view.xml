@@ -21,7 +21,7 @@
                 width="50%" height="5%"/>
 
             <layout:VerticalLayout id="InfoViewUserInfoHeader">
-                <Text text="Læge: {view>/UserInfo/doctor}" class="smallText" id="doctor"/>
+                <Text text="Navn: {view>/UserInfo/doctor}" class="smallText" id="doctor"/>
                 <Text text="Yder nr: {view>/UserInfo/ydernr}" class="smallText" id="ydernr"/>
                 <Text text="CVR nr: {view>/UserInfo/cvrnr}" class="smallText" id="cvrnr"/>
                 <Text text="Bruger nr: {view>/UserInfo/brugernr}" class="smallText" id="bruger"/>
@@ -51,7 +51,7 @@
                     <IconTabFilter text="Hjælp" id="HeadSupport" key="HeadXSupport"/>
                 </items>
             </IconTabBar>
-            <layout:Splitter id="VaresogViewSplitter" orientation="Horizontal" height="70%">
+            <layout:Splitter id="VaresogViewSplitter" orientation="Horizontal" height="69%">
                 <layout:contentAreas>
                 <Page id="masterPage" title="{i18n>products}" class="myMasterPage"
                     layoutData="{layout:SplitterLayoutData, resizable: true, size: '60%'}">

@@ -52,7 +52,7 @@
                 </items>
             </IconTabBar>
 
-            <layout:Splitter id="VaresogViewSplitter" orientation="Horizontal" height="70%">
+            <layout:Splitter id="VaresogViewSplitter" orientation="Horizontal" height="69%">
                 <layout:contentAreas>
                 <Page id="masterPage" title="{i18n>products}" class="myMasterPage"
                     layoutData="{layout:SplitterLayoutData, resizable: true, size: '60%'}">

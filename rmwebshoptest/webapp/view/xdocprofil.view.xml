@@ -21,7 +21,7 @@
                 width="50%" height="5%"/>
 
             <layout:VerticalLayout id="InfoViewUserInfoHeader">
-                <Text text="Læge: {view>/UserInfo/doctor}" class="smallText" id="doctor"/>
+                <Text text="Navn: {view>/UserInfo/doctor}" class="smallText" id="doctor"/>
                 <Text text="Yder nr: {view>/UserInfo/ydernr}" class="smallText" id="ydernr"/>
                 <Text text="CVR nr: {view>/UserInfo/cvrnr}" class="smallText" id="cvrnr"/>
                 <Text text="Bruger nr: {view>/UserInfo/brugernr}" class="smallText" id="bruger"/>
@@ -52,7 +52,7 @@
                 </items>
             </IconTabBar>
 
-            <layout:Splitter id="ProfilProfilViewLayout" orientation="Horizontal">
+            <layout:Splitter id="ProfilProfilViewLayout" orientation="Horizontal" height="69%">
                 <layout:contentAreas>
                     <Page id="ProfildetailPage" title="Leveringsoplysninger"
                          layoutData="{layout:SplitterLayoutData, resizable: true, size: '50%'}">
