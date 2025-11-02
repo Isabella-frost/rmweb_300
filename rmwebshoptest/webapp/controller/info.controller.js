@@ -26,6 +26,8 @@ sap.ui.define([
             });
             this.getView().setModel(oViewModel, "view");
 
+            this._checkBasketOnLogin();
+
             // 2️⃣ Load data when route matches
             this.getOwnerComponent()
                 .getRouter()
@@ -45,6 +47,52 @@ sap.ui.define([
 
             // Fetch user data each time the route is entered
             this._fetchUserData();
+        },
+
+        _checkBasketOnLogin: function () {
+            var oODataModel = this.getOwnerComponent().getModel();
+            var oViewModel = this.getView().getModel("view");
+
+            // ✅ Get current UserNo from the global model
+            var oGlobalModel = this.getOwnerComponent().getModel("globalUser");
+            var sUserNo = oGlobalModel ? oGlobalModel.getProperty("/UserNo") : null;
+
+            if (!sUserNo) {
+                console.warn("No user number found for login basket check.");
+                return;
+            }
+
+            var aFilters = [
+                new sap.ui.model.Filter("UserNo", sap.ui.model.FilterOperator.EQ, sUserNo)
+            ];
+
+            oODataModel.read("/BasketSet", {
+                filters: aFilters,
+                success: function (oData) {
+                    var aBasketItems = oData.results || [];
+                    oViewModel.setProperty("/shoppingcart", aBasketItems);
+
+                    // 💡 Only show info if basket has items
+                    if (aBasketItems.length > 0) {
+                        var iCount = aBasketItems.length;
+
+                        sap.m.MessageBox.information(
+                            "Vær opmærksom på, at du har " + iCount + " vare(r) i din kurv fra tidligere.",
+                            {
+                                title: "Kurv fundet",
+                                actions: [sap.m.MessageBox.Action.OK]
+                            }
+                        );
+                    } else {
+                        console.log("Kurven er tom ved login ingen besked vist.");
+                    }
+                },
+                error: function (oError) {
+                    console.error("Fejl ved læsning af kurv:", oError);
+                    // Optional warning if basket cannot be read
+                    sap.m.MessageToast.show("Kunne ikke hente kurv ved login.");
+                }
+            });
         },
 
         /**
@@ -124,7 +172,59 @@ sap.ui.define([
 
         onBack: function () {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-            oRouter.navTo("Routemain");
+            var oViewModel = this.getView().getModel("view");
+            var oGlobalModel = this.getOwnerComponent().getModel("globalUser");
+            var sUserNo = oGlobalModel ? oGlobalModel.getProperty("/UserNo") : null;
+
+            // 1. Load the current basket before logging off
+            var oODataModel = this.getOwnerComponent().getModel();
+
+            var aFilters = [
+                new sap.ui.model.Filter("UserNo", sap.ui.model.FilterOperator.EQ, sUserNo)
+            ];
+
+            oODataModel.read("/BasketSet", {
+                filters: aFilters,
+                success: function (oData) {
+                    var aBasketItems = oData.results || [];
+
+                    // 2. Check if there are any items
+                    if (aBasketItems.length > 0) {
+                        // 3. Ask user before logging off
+                        sap.m.MessageBox.confirm(
+                            "Du har varer i din kurv. Vil du fortsat logge af? (Din kurv gemmes til næste besøg)",
+                            {
+                                title: "Bekræft log af",
+                                actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
+                                onClose: function (sAction) {
+                                    if (sAction === sap.m.MessageBox.Action.OK) {
+                                        // Proceed to main page
+                                        oRouter.navTo("Routemain");
+                                    }
+                                }
+                            }
+                        );
+                    } else {
+                        // No items — just log off
+                        oRouter.navTo("Routemain");
+                    }
+                },
+                error: function (oError) {
+                    // If basket cannot be loaded, show a simple fallback message
+                    sap.m.MessageBox.warning(
+                        "Kunne ikke hente din kurv. Vil du fortsætte med at logge af?",
+                        {
+                            actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
+                            onClose: function (sAction) {
+                                if (sAction === sap.m.MessageBox.Action.OK) {
+                                    oRouter.navTo("Routemain");
+                                }
+                            }
+                        }
+                    );
+                    console.error("BasketSet read error during logoff:", oError);
+                }
+            });
         },
 
         onOpenBasket: function () {

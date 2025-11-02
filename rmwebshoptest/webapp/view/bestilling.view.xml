@@ -63,7 +63,7 @@
                                         id="showClosedOrdersCheckbox"
                                         selected="false"
                                         select=".onShowClosedOrdersToggle" />
-                                <List id="orderList" items="{path: 'ordersModel>/orders'}" mode="SingleSelectMaster" selectionChange="onOrderSelect">
+                                <List id="orderList" items="{path: 'ordersModel>/orders'}" mode="SingleSelectMaster" selectionChange="onOrderSelect" noDataText="Ingen ordre fundet">
                                     <CustomListItem>
                                         <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTop">
                                             <HBox justifyContent="SpaceBetween">
@@ -84,6 +84,7 @@
                         <Button text="Tilføj kopi af ordre til kurv" press="onCopyOrder"></Button>
                         <List
                             id="orderItemsList"
+                            visible="{= ${ordersModel>/orders}.length > 0 }"
                             noDataText="Ingen varer fundet for denne ordre">
                             
                                 <CustomListItem>

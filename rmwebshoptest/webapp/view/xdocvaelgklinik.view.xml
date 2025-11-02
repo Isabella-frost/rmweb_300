@@ -10,7 +10,8 @@
                   selectionChange=".onSelectClinic">
                 <StandardListItem
                     title="{loginUsers>AdrName}"
-                    description="{loginUsers>UserNo} {loginUsers>Afdeling}"
+                    description="{loginUsers>AdrStreet}, {loginUsers>AdrZip} {loginUsers>AdrCity}"
+                    info="{loginUsers>UserNo} {loginUsers>Afdeling}"
                     infoState="Success"/>
             </List>
         </content>

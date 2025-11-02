@@ -10,12 +10,12 @@ sap.ui.define([
 function (BaseController, MessageToast, JSONModel, MessageBox, Filter, FilterOperator, Formatter) {
     "use strict";
 
-    return BaseController.extend("rm.webshop.shop.controller.bestilling", {
+    return BaseController.extend("rm.webshop.test.controller.bestilling", {
         
         formatter: Formatter,
         
         onInit: function () {
-            var sLogo = sap.ui.require.toUrl("rm/webshop/shop") + "/img/Logo.jpg";
+            var sLogo = sap.ui.require.toUrl("rm/webshop/test") + "/img/Logo.jpg";
             var oViewModel = new JSONModel({
                 rmLogo: sLogo,
                 UserInfo: {

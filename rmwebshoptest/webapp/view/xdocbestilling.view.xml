@@ -67,6 +67,7 @@
                                     items="{path: 'ordersModel>/orders'}"
                                     mode="SingleSelectMaster"
                                     selectionChange="onOrderSelect"
+                                    noDataText="Ingen ordre fundet"
                                     growing="true"
                                     growingScrollToLoad="true"
                                     growingThreshold="50">
@@ -90,6 +91,7 @@
                         <Button text="Tilføj kopi af ordre til kurv" press="onCopyOrder"></Button>
                         <List
                             id="orderItemsList"
+                            visible="{= ${ordersModel>/orders}.length > 0 }"
                             noDataText="Ingen varer fundet for denne ordre">
                             
                             <CustomListItem>

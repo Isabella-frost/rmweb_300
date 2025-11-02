@@ -5,9 +5,10 @@
     xmlns:layout="sap.ui.layout">
     <Dialog
         id="xdocOrderConfirmationDialog"
+        contentWidth="26rem"
         title="Bekræft bestilling">
         <content>
-            <VBox class="sapUiContentPadding">
+            <VBox class="sapUiMediumMargin sapUiTinyMarginTop">
                 <Text
                     id="orderConfirmationText"
                     class="sapUiSmallMarginBottom" />
@@ -19,30 +20,37 @@
                     class="sapUiSmallMarginTop" 
                     visible="{= ${orderDialog>/selectedAddressOption} === 0}"/>
                 
+                <VBox height="0.5rem"/>
+
                 <Text
                     id="orderAddressText"
                     visible="{= ${orderDialog>/selectedAddressOption} === 0}"
                     text="{orderDialog>/registeredAddress/streetName} {orderDialog>/registeredAddress/streetNr}, {orderDialog>/registeredAddress/postalCode} {orderDialog>/registeredAddress/city}" />
-
-                <Title
-                    level="H3"
-                    text="Alternativ leveringsadresse"
-                    class="sapUiSmallMarginTop" 
-                    visible="{= ${orderDialog>/selectedAddressOption} === 1}"/>
+                
+                <VBox height="1rem"/>
 
                 <Title
                     level="H3"
                     text="Kontaktinformation"
                     class="sapUiSmallMarginTop" />
+                
+                <VBox height="0.5rem"/>
 
                 <Label text="Email:" />
                 <Input id="emailInput" value="{orderDialog>/contactInfo/email}"/>
+
+                <VBox height="0.5rem"/>
+
                 <Label text="Telefonnummer:" class="sapUiSmallMarginTop" />
                 <HBox>
                 <Input value="+45" width="4em" editable="false" textAlign="Center" class="sapUiTinyMarginEnd" 
                                         id="phonePrefixProfil"/>
-                <Input id="phoneInput" value="{orderDialog>/contactInfo/phone}" width="21em"/>
+                <Input id="phoneInput" value="{orderDialog>/contactInfo/phone}" width="10em"/>
+
                 </HBox>
+
+                <VBox height="1rem"/>
+
             </VBox>
         </content>
         <buttons>
