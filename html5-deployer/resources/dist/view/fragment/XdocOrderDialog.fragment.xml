@@ -4,7 +4,7 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:layout="sap.ui.layout">
     <Dialog
-        id="orderConfirmationDialog"
+        id="xdocOrderConfirmationDialog"
         title="Bekræft bestilling">
         <content>
             <VBox class="sapUiContentPadding">
@@ -12,20 +12,6 @@
                     id="orderConfirmationText"
                     class="sapUiSmallMarginBottom" />
 
-                <Title
-                    level="H3"
-                    text="Vælg leveringsadresse"
-                    class="sapUiSmallMarginTop" />
-                
-                <RadioButtonGroup 
-                    columns="2" 
-                    selectedIndex="{orderDialog>/selectedAddressOption}" 
-                    select="onAddressOptionSelect">
-                    <buttons>
-                        <RadioButton id="radioExisting" text="Registreret adresse" />
-                        <RadioButton id="radioNew" text="Alternativ adresse" />
-                    </buttons>
-                </RadioButtonGroup>
 
                 <Title
                     level="H3"
@@ -43,22 +29,6 @@
                     text="Alternativ leveringsadresse"
                     class="sapUiSmallMarginTop" 
                     visible="{= ${orderDialog>/selectedAddressOption} === 1}"/>
-                    
-                <f:SimpleForm
-                    id="alternativeAddressForm"
-                    editable="true"
-                    layout="ResponsiveGridLayout"
-                    visible="{= ${orderDialog>/selectedAddressOption} === 1}">
-                    <f:content>
-                        <Label text="Vejnavn og nr." />
-                        <Input id="alternativeStreetInput" value="{orderDialog>/alternativeAddress/streetName}" />
-                        <Label text="Postnummer" />
-                        <Input id="alternativePostalCodeInput" value="{orderDialog>/alternativeAddress/postalCode}"
-                                liveChange=".onZipcodeChange" />
-                        <Label text="By" />
-                        <Input id="alternativeCityInput" value="{orderDialog>/alternativeAddress/city}" />
-                    </f:content>
-                </f:SimpleForm>
 
                 <Title
                     level="H3"

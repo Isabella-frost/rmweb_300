@@ -52,7 +52,7 @@
                     <IconTabFilter text="Hjælp" id="HeadSupport" key="HeadSupport"/>
                 </items>
             </IconTabBar>
-            <layout:Splitter id="BestillingViewLayout" orientation="Horizontal" height="70%">
+            <layout:Splitter id="BestillingViewLayout" orientation="Horizontal" height="69%">
                 <layout:contentAreas>
                     <Page id="BestillingdetailPage" title="Ordrehistorik"
                           layoutData="{layout:SplitterLayoutData, resizable: true, size: '50%'}">
@@ -103,7 +103,7 @@
                                     <Text text="Varenr: {ordersModel>Matnr}" class="sapMObjectListItemIntro"/>
                                     <Text text="Leverandør varenr: {ordersModel>Levmat}" class="sapMObjectListItemIntro"/>
                                     <Text text="Generel status: {ordersModel>ItemStatusText}" class="sapMObjectListItemIntro"/>
-                                    <Text text="Forventet levering: {ordersModel>ExpectDelivDateEdit}" class="sapMObjectListItemIntro"/>
+                                    <Text text="Forventet afsendelse: {ordersModel>ExpectDelivDateEdit}" class="sapMObjectListItemIntro"/>
 
                                     <VBox items="{ordersModel>TrackTraces}">
                                         <HBox class="sapUiSmallMarginBegin sapUiTinyMarginTop" alignItems="Center">

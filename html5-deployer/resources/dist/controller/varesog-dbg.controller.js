@@ -376,6 +376,48 @@ onOrder: function () {
             }
         },
 
+        onZipcodeChange: function(oEvent) {
+            var sZip = oEvent.getParameter("value").trim();
+            var oInput = oEvent.getSource();
+            var that = this;
+
+            // Only trigger lookup if ZIP has 4 digits
+            if (sZip.length === 4 && /^[0-9]{4}$/.test(sZip)) {
+                var oODataModel = this.getOwnerComponent().getModel(); // your default OData model
+
+                // Call the ZIPCodeSet entity using read
+                oODataModel.read("/ZIPCodeSet('" + sZip + "')", {
+                    success: function(oData) {
+                        // Extract Ort01 (city name)
+                        var sCity = oData.Ort01;
+
+                        // Update dialog model
+                        var oDialogModel = that._oOrderDialog.getModel("orderDialog");
+                        oDialogModel.setProperty("/alternativeAddress/city", sCity);
+
+                        // Optionally, visually indicate success
+                        oInput.setValueState("None");
+                    },
+                    error: function(oError) {
+                        // Reset city field
+                        var oDialogModel = that._oOrderDialog.getModel("orderDialog");
+                        oDialogModel.setProperty("/alternativeAddress/city", "");
+
+                        // Show error message
+                        MessageBox.error("Dette postnummer findes ikke i Danmark");
+
+                        // Optional: visually indicate error on ZIP field
+                        oInput.setValueState("Error");
+                    }
+                });
+            } else {
+                // If less than 4 digits, clear the city and reset any error state
+                var oDialogModel = this._oOrderDialog.getModel("orderDialog");
+                oDialogModel.setProperty("/alternativeAddress/city", "");
+                oInput.setValueState("None");
+            }
+        },
+
         _setupOrderDialog: function(iTotalItems) {
             var oViewModel = this.getView().getModel("view");
             var oUserContact = oViewModel.getProperty("/UserContact") || {
@@ -384,10 +426,9 @@ onOrder: function () {
 
             var oDialogModel = new JSONModel({
                 alternativeAddress: {
-                    streetName: "",
-                    streetNr: "",
-                    postalCode: "",
-                    city: ""
+                    streetName: oUserContact.altstreetName,
+                    postalCode: oUserContact.altpostalCode, 
+                    city:  oUserContact.altcity
                 },
                 contactInfo: {
                     email: oUserContact.email,
@@ -422,18 +463,72 @@ onOrder: function () {
                     return;
                 }
 
-                sAddressText = oAddressData.streetName + " " + oAddressData.streetNr + ", " +
+                sAddressText = oAddressData.streetName + ", " +
                                 oAddressData.postalCode + " " + oAddressData.city;
             } else {
                 // Alternative Address selected (Index 1)
                 var oAltAddress = oDialogData.alternativeAddress;
-                if (!oAltAddress.streetName || !oAltAddress.streetNr || !oAltAddress.postalCode || !oAltAddress.city) {
+                if (!oAltAddress.streetName || !oAltAddress.postalCode || !oAltAddress.city) {
                     MessageBox.error("Udfyld venligst alle felter for den alternative adresse.");
                     return;
                 }
-                sAddressText = oAltAddress.streetName + " " + oAltAddress.streetNr + ", " + oAltAddress.postalCode + " " + oAltAddress.city;
+                sAddressText = oAltAddress.streetName + ", " + oAltAddress.postalCode + " " + oAltAddress.city;
             }
+            
+            // --- ZIP Validation ---
+            var oDialogModel = this._oOrderDialog.getModel("orderDialog");
+            var oDialogData = oDialogModel.getData();
+            var iSelectedAddressOption = oDialogData.selectedAddressOption;
+            var oODataModel = this.getOwnerComponent().getModel();
+
+            var sZipToValidate = "";
+
+            // Pick ZIP from the correct address
+            if (iSelectedAddressOption === 0) {
+                // Registered address
+                sZipToValidate = oDialogData.registeredAddress.postalCode;
+            } else {
+                // Alternative address
+                sZipToValidate = oDialogData.alternativeAddress.postalCode;
+            }
+
+            // Ensure ZIP is 4 digits before calling OData
+            if (!/^[0-9]{4}$/.test(sZipToValidate)) {
+                MessageBox.error("Postnummer skal bestå af 4 cifre.");
+                return;
+            }
+
+            // ✅ Synchronous validation using OData service
+            try {
+                oODataModel.read("/ZIPCodeSet('" + sZipToValidate + "')", {
+                    async: false, // ensure we wait for result before continuing
+                    success: function(oData) {
+                        if (!oData || !oData.Ort01) {
+                            MessageBox.error("Dette postnummer findes ikke i Danmark.");
+                            throw new Error("Invalid ZIP");
+                        }
+                    },
+                    error: function() {
+                        MessageBox.error("Dette postnummer findes ikke i Danmark.");
+                        throw new Error("Invalid ZIP");
+                    }
+                });
+            } catch (err) {
+                return; // Stop further execution
+            }
+
             // ---------------------------------
+            // --- Mail Validation ---
+            var oMailInput = this.byId("emailInput");
+            var sRawMail = oMailInput.getValue().trim() || "";
+
+            // ✅ Only validate if mail is filled
+            if (sRawMail.length > 0) {
+                if (!sRawMail.includes("@") || !sRawMail.includes(".")) {
+                    MessageBox.error("Indtast venligst en gyldig e-mailadresse.");
+                    return;
+                }
+            }
 
             // --- Phone Number Validation and Formatting ---
             var oPhoneInput = this.byId("phoneInput");
@@ -637,7 +732,10 @@ onOrder: function () {
                             streetNr: oData.AdrHouseNo || "",
                             postalCode: oData.AdrZip || "",
                             city: oData.AdrCity || ""
-                        }
+                        },
+                        altstreetName: oData.DelStreet || "",
+                        altpostalCode: oData.DelZip || "",
+                        altcity: oData.DelCity || ""
                     });
                 }.bind(this),
                 error: function(oError) {

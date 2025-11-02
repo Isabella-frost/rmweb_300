@@ -20,7 +20,7 @@
                 width="50%" height="5%"/>
 
             <layout:VerticalLayout id="InfoViewUserInfoHeader">
-                <Text text="Læge: {view>/UserInfo/doctor}" class="smallText" id="doctor"/>
+                <Text text="Navn: {view>/UserInfo/doctor}" class="smallText" id="doctor"/>
                 <Text text="Yder nr: {view>/UserInfo/ydernr}" class="smallText" id="ydernr"/>
                 <Text text="CVR nr: {view>/UserInfo/cvrnr}" class="smallText" id="cvrnr"/>
                 <Text text="Bruger nr: {view>/UserInfo/brugernr}" class="smallText" id="bruger"/>
@@ -50,7 +50,7 @@
                     <IconTabFilter text="Hjælp" id="HeadSupport" key="HeadXSupport"/>
                 </items>
             </IconTabBar>
-        <layout:Splitter id="BestillingViewLayout" orientation="Horizontal" height="70%">
+        <layout:Splitter id="BestillingViewLayout" orientation="Horizontal" height="69%">
             <layout:contentAreas>
                 <Page id="BestillingdetailPage" title="Ordrehistorik" 
                       enableScrolling="false"
@@ -110,7 +110,7 @@
                                     <Text text="Leverandør varenr: {ordersModel>Levmat}" class="sapMObjectListItemIntro"/>
 
                                     <Text text="Generel status: {ordersModel>ItemStatusText}" class="sapMObjectListItemIntro"/>
-                                    <Text text="Forventet levering: {ordersModel>ExpectDelivDateEdit}" class="sapMObjectListItemIntro"/>
+                                    <Text text="Forventet afsendelse: {ordersModel>ExpectDelivDateEdit}" class="sapMObjectListItemIntro"/>
 
                                                                         <VBox items="{ordersModel>TrackTraces}">
                                         <HBox class="sapUiSmallMarginBegin sapUiTinyMarginTop" alignItems="Center">
