@@ -53,8 +53,8 @@ function (BaseController, MessageToast, JSONModel, MessageBox, Filter, FilterOpe
                 oIconTabBar.setSelectedKey("HeadXOversigt");
             }
 
-            this._loadOrderHeaders(sUserNo);
             this._fetchUserData();
+            this._loadOrderHeaders(sUserNo);
         },
 
         _loadOrderHeaders: function (sUserNo) {
@@ -409,9 +409,61 @@ function (BaseController, MessageToast, JSONModel, MessageBox, Filter, FilterOpe
                 });
             });
         },
-                onBack: function () {
+        
+        onBack: function () {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-            oRouter.navTo("Routemain");
+            var oViewModel = this.getView().getModel("view");
+            var sUserNo = this._getCurrentUserNo(); // Assuming you have this helper function
+
+            // 1. Load the current basket before logging off
+            var oODataModel = this.getOwnerComponent().getModel();
+
+            var aFilters = [
+                new sap.ui.model.Filter("UserNo", sap.ui.model.FilterOperator.EQ, sUserNo)
+            ];
+
+            oODataModel.read("/BasketSet", {
+                filters: aFilters,
+                success: function (oData) {
+                    var aBasketItems = oData.results || [];
+
+                    // 2. Check if there are any items
+                    if (aBasketItems.length > 0) {
+                        // 3. Ask user before logging off
+                        sap.m.MessageBox.confirm(
+                            "Du har varer i din kurv. Vil du fortsat logge af? (Din kurv gemmes til næste besøg)",
+                            {
+                                title: "Bekræft log af",
+                                actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
+                                onClose: function (sAction) {
+                                    if (sAction === sap.m.MessageBox.Action.OK) {
+                                        // Proceed to main page
+                                        oRouter.navTo("Routemain");
+                                    }
+                                }
+                            }
+                        );
+                    } else {
+                        // No items — just log off
+                        oRouter.navTo("Routemain");
+                    }
+                },
+                error: function (oError) {
+                    // If basket cannot be loaded, show a simple fallback message
+                    sap.m.MessageBox.warning(
+                        "Kunne ikke hente din kurv. Vil du fortsætte med at logge af?",
+                        {
+                            actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
+                            onClose: function (sAction) {
+                                if (sAction === sap.m.MessageBox.Action.OK) {
+                                    oRouter.navTo("Routemain");
+                                }
+                            }
+                        }
+                    );
+                    console.error("BasketSet read error during logoff:", oError);
+                }
+            });
         },
 
         onOpenBasket: function () {

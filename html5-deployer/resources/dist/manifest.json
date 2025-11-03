@@ -176,6 +176,13 @@
           "target": [
             "Targetxdocsupport"
           ]
+        },
+        {
+          "pattern": "xdocvaelgklinik",
+          "name": "Routexdocvaelgklinik",
+          "target": [
+            "Targetxdocvaelgklinik"
+          ]
         }
       ],
       "targets": {
@@ -255,6 +262,13 @@
           "clearControlAggregation": false,
           "viewId": "vaelgklinik",
           "viewName": "vaelgklinik"
+        },
+        "Targetxdocvaelgklinik": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "xdocvaelgklinik",
+          "viewName": "xdocvaelgklinik"
         }
       }
     },

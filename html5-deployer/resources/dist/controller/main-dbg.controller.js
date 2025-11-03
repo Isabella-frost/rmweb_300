@@ -180,7 +180,7 @@ sap.ui.define([
 
                         oRouter.navTo("Routeinfo");
                     } else {
-                        oRouter.navTo("Routevaelgklinik");
+                        oRouter.navTo("Routexdocvaelgklinik");
                     }
                 },
 
