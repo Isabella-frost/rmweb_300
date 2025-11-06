@@ -77,8 +77,7 @@
                         <Text text="Vejledning til at opdatere din profil:" class="sapUiTinyMarginBottom" design="Bold" />
                         <VBox>
                             <Text text="1. Gå til 'Profil' fanen." />
-                            <Text text="2. Klik på 'Rediger' knappen." />
-                            <Text text="3. Foretag dine ændringer og klik på 'Gem'." />
+                            <Text text="2. Foretag dine ændringer og klik på 'Gem'." />
                         </VBox>
                 </Panel>
             </VBox>

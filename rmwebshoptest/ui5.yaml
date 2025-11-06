@@ -17,8 +17,8 @@ server:
           url: https://ui5.sap.com
         backend:
           - path: /sap
-            url: http://dwsifl:8010
-            destination: dws9116300
+            url: http://dws300:8043
+            destination: DWS300_HTTP
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

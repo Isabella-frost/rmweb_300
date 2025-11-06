@@ -7,7 +7,7 @@
 |**Generation Platform**<br>SAP Business Application Studio|
 |**Template Used**<br>Basic V2|
 |**Service Type**<br>SAP System (ABAP On-Premise)|
-|**Service URL**<br>http://dwsifl:8010/sap/opu/odata/sap/ZWEBSHOP_SRV|
+|**Service URL**<br>http://dws300:8043/sap/opu/odata/sap/ZWEBSHOP_SRV|
 |**Module Name**<br>shop|
 |**Application Title**<br>RM Webshop|
 |**Namespace**<br>rm.webshop|

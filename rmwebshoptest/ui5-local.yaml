@@ -31,8 +31,8 @@ server:
         ignoreCertErrors: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         backend:
           - path: /sap
-            url: http://dwsifl:8010
-            destination: dws9116300
+            url: http://dws300:8043
+            destination: DWS300_HTTP
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:

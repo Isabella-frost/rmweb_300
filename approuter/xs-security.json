@@ -3,8 +3,8 @@
     "tenant-mode": "dedicated",
     "oauth2-configuration": {
         "redirect-uris": [
-            "https://rmwebshoptest-approuter-fearless-mandrill-em.cfapps.eu10-004.hana.ondemand.com/login/callback",
-            "https://rmwebshoptest-approuter-fearless-mandrill-em.cfapps.eu10-004.hana.ondemand.com/**",
+            "https://rmwebshoptest-approuter.cfapps.eu30.hana.ondemand.com/login/callback",
+            "https://rmwebshoptest-approuter.cfapps.eu30.hana.ondemand.com/**",
             "http://localhost:5001"
         ]
     }

@@ -10,9 +10,11 @@
     {
       "source": "^/sap/(.*)$",
       "target": "/sap/$1",
-      "destination": "dws9116300",
+      "destination": "DWS300_HTTP",
       "authenticationType": "xsuaa",
       "csrfProtection": false
     }
   ]
 }
+
+

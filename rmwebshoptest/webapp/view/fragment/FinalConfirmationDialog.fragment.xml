@@ -5,7 +5,7 @@
         id="finalConfirmationDialog"
         title="Bekræft bestilling">
         <content>
-            <VBox class="sapUiContentPadding">
+            <VBox class="sapUiMediumMargin">
                 <Text id="finalConfirmationText" class="sapUiSmallMarginBottom" />
                 <Title level="H3" text="Leveringsadresse" />
                 <Text id="finalAddressText" class="sapUiSmallMarginBottom" />

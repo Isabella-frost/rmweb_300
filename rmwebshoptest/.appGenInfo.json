@@ -4,7 +4,7 @@
     "generatorPlatform": "SAP Business Application Studio",
     "serviceType": "SAP System (ABAP On-Premise)",
     "metadataFilename": "",
-    "serviceUrl": "http://dwsifl:8010/sap/opu/odata/sap/ZWEBSHOP_SRV",
+    "serviceUrl": "http://dws300:8043/sap/opu/odata/sap/ZWEBSHOP_SRV",
     "appName": "shop",
     "appTitle": "RM Webshop",
     "appDescription": "RM Webshop",
