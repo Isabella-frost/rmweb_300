@@ -8,20 +8,20 @@
 
     <u:ObjectPageHeaderContent id="BestillingViewObjHeader">
         <u:content>
-
             <Image id="BestillingViewImageLogo"
                 src="{
                     path: 'view>/rmLogo'
                 }"
-                width="18%" height="10%"/>
+                width="20%" height="10%"/>
             
             <Image id="BestillingViewImageToAddSpace"
                 src="{
                     path: 'view>/123'
                 }"
-                width="40%" height="5%"/>
+                width="38%" height="5%"/>
             
             <layout:VerticalLayout id="ProfilViewUserInfoHeader">
+                <Text text=" " />
                 <Text text="Navn: {view>/UserInfo/navn}" class="smallText" id="doctor"/>
                 <Text text="Adresse: {view>/UserInfo/adresse}, {view>/UserInfo/zip} {view>/UserInfo/by}" class="smallText" id="ydernr"/>
                 <Text text="Telefon: {view>/UserInfo/tlfnr}" class="smallText" id="cvrnr"/>
@@ -30,6 +30,7 @@
             </layout:VerticalLayout>
             
             <layout:VerticalLayout id="hi">
+            <Text text=" " />
              <Button text="Log af" press=".onBack"></Button>
 
                 <Button
@@ -80,8 +81,14 @@
                         <Text text="Vejledning til at opdatere din profil:" class="sapUiTinyMarginBottom" design="Bold" />
                         <VBox>
                             <Text text="1. Gå til 'Profil' fanen." />
-                            <Text text="2. Klik på 'Rediger' knappen." />
-                            <Text text="3. Foretag dine ændringer og klik på 'Gem'." />
+                            <Text text="2. Foretag dine ændringer og klik på 'Gem'." />
+                            <Text text=" " />
+                        </VBox>
+
+                        <Text text="Vejledning til at skifte din afdeling:" class="sapUiTinyMarginBottom" design="Bold" />
+                        <VBox>
+                            <Text text="1. Tryk på 'Log af'." />
+                            <Text text="2. Log ind på ny og vælg den ønskede afdeling." />
                         </VBox>
                 </Panel>
             </VBox>

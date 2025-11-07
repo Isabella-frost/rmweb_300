@@ -12,15 +12,16 @@
                     path: 'view>/rmLogo',
                     formatter : '.formatter.pictureUrl'
                 }"
-                width="18%" height="10%"/>
+                width="20%" height="10%"/>
             
             <Image id="InfoViewImageToAddSpace"
                 src="{
                     path: 'view>/123'
                 }"
-                width="50%" height="5%"/>
+                width="48%" height="5%"/>
 
             <layout:VerticalLayout id="InfoViewUserInfoHeader">
+                <Text text=" " />
                 <Text text="Navn: {view>/UserInfo/doctor}" class="smallText" id="doctor"/>
                 <Text text="Yder nr: {view>/UserInfo/ydernr}" class="smallText" id="ydernr"/>
                 <Text text="CVR nr: {view>/UserInfo/cvrnr}" class="smallText" id="cvrnr"/>
@@ -28,6 +29,7 @@
             </layout:VerticalLayout>
 
             <layout:VerticalLayout id="hi">
+                <Text text=" " />
              <Button text="Log af" press=".onBack"></Button>
 
                 <Button
